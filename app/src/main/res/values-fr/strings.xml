@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TestMobile</string>
+    <string name="action_settings">Settings</string>
+    <string name="first_fragment_label">écran d’accueil</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="start">Commencer</string>
+    <string name="previous">Retourner</string>
+    <string name="restart">Recommencer</string>
+    <string name="hello_first_fragment">Bienvenue</string>
+    <string name="loading_msg_1">Nous téléchargeons les données…</string>
+    <string name="loading_msg_2">C’est presque fini…</string>
+    <string name="loading_msg_3">Plus que quelques secondes avant d’avoir le résultat…</string>
+    <string name="loading_done">Téléchargement terminé</string>
+</resources>
