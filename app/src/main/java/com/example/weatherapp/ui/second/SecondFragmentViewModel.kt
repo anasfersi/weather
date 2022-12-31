@@ -8,6 +8,8 @@ import com.example.weatherapp.data.WAITING_MESSAGES
 import com.example.weatherapp.data.model.ListItem
 import com.example.weatherapp.data.remote.RetrofitHelper
 import com.example.weatherapp.data.remote.WeatherApi
+import com.example.weatherapp.ui.extensions.toCelsius
+import com.example.weatherapp.ui.extensions.toWeatherIconImageUrl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -84,8 +86,6 @@ class SecondFragmentViewModel : ViewModel() {
     private var idx = 0
     private fun getCityWeather() {
         if (idx > LIST_OF_CITIES.size) return
-        val imgUrl = "https://openweathermap.org/img/wn/"
-        val imgExt = "@4x.png"
         val city = LIST_OF_CITIES[idx]
         viewModelScope.launch {
             try {
@@ -98,7 +98,7 @@ class SecondFragmentViewModel : ViewModel() {
                             currentState.copy(
                                 item = ListItem(
                                     body.name,
-                                    imgUrl + weather.icon + imgExt,
+                                    weather.icon.toWeatherIconImageUrl(),
                                     body.main.temp.toCelsius().toFloat().toString()
                                 )
                             )
@@ -118,5 +118,3 @@ class SecondFragmentViewModel : ViewModel() {
     }
 
 }
-
-private fun Double.toCelsius() = (this - 273.15)

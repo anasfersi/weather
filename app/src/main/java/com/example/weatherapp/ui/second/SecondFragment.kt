@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentSecondBinding
 import com.example.weatherapp.ui.adapter.WeatherListAdapter
+import com.example.weatherapp.ui.extensions.toPercentageString
 import kotlinx.coroutines.launch
 
 /**
@@ -52,6 +53,7 @@ class SecondFragment : Fragment() {
                 viewModel.uiState.collect {
                     binding.progressBar.progress = it.progressValue
                     binding.textviewSecond.text = getString(it.waitingText)
+                    binding.progressValue.text = it.progressValue.toPercentageString()
                     if (it.item != null)
                         (binding.itemsList.adapter as WeatherListAdapter).add(it.item)
                     if (binding.progressBar.progress < 100)
@@ -76,10 +78,12 @@ class SecondFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
             binding.itemsList.visibility = View.VISIBLE
             binding.buttonRestart.visibility = View.VISIBLE
+            binding.progressValue.visibility = View.GONE
         } else {
             binding.progressBar.visibility = View.VISIBLE
             binding.itemsList.visibility = View.GONE
             binding.buttonRestart.visibility = View.GONE
+            binding.progressValue.visibility = View.VISIBLE
         }
     }
 }
