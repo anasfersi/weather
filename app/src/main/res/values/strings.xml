@@ -11,4 +11,5 @@
     <string name="loading_msg_2">It\'s almost done…</string>
     <string name="loading_msg_3">More than a few seconds before having the result…</string>
     <string name="loading_done">Done Downloading</string>
+    <string name="loading_error">Error Please check your network connection and Api Key</string>
 </resources>

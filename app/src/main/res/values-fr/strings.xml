@@ -12,4 +12,5 @@
     <string name="loading_msg_2">C’est presque fini…</string>
     <string name="loading_msg_3">Plus que quelques secondes avant d’avoir le résultat…</string>
     <string name="loading_done">Téléchargement terminé</string>
+    <string name="loading_error">Erreur Veuillez vérifier votre connexion réseau et la clé API</string>
 </resources>

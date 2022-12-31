@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.second
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.R
 import com.example.weatherapp.data.LIST_OF_CITIES
 import com.example.weatherapp.data.WAITING_MESSAGES
 import com.example.weatherapp.data.model.ListItem
@@ -87,23 +88,32 @@ class SecondFragmentViewModel : ViewModel() {
         val imgExt = "@4x.png"
         val city = LIST_OF_CITIES[idx]
         viewModelScope.launch {
-            val result = weatherApi.getCityWeather(city.lat, city.lon)
-            if (result != null && result.isSuccessful) {
-                if (result.body() != null) {
-                    val body = result.body()!!
-                    val weather = body.weather.first()
-                    _uiState.update { currentState ->
-                        currentState.copy(
-                            item = ListItem(
-                                body.name,
-                                imgUrl + weather.icon + imgExt,
-                                body.main.temp.toCelsius().toFloat().toString()
+            try {
+                val result = weatherApi.getCityWeather(city.lat, city.lon)
+                if (result != null && result.isSuccessful) {
+                    if (result.body() != null) {
+                        val body = result.body()!!
+                        val weather = body.weather.first()
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                item = ListItem(
+                                    body.name,
+                                    imgUrl + weather.icon + imgExt,
+                                    body.main.temp.toCelsius().toFloat().toString()
+                                )
                             )
-                        )
+                        }
                     }
                 }
+                idx++
+            } catch (e: Exception) {
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        waitingText = R.string.loading_error
+                    )
+                }
+                println("Error : $e")
             }
-            idx++
         }
     }
 
